@@ -1,0 +1,36 @@
+body {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.container {
+  width: 180px;
+}
+
+.display {
+  height: 40px;
+  border: 1px black solid;
+  margin-bottom: 3px;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+  justify-content: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid black;
+  width: 41px;
+  height: 41px;
+}
+
+#zero {
+  width: 86px;
+}

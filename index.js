@@ -62,7 +62,8 @@ buttons.forEach((button) => {
     
     if (utilityList.includes(e.target.innerText)) {
       if (e.target.innerText === '=') {
-        console.log(a + operator + b);
+        const calc = operate(parseFloat(a), operator, parseFloat(b));
+        display.innerText = calc;
       } else {
         display.innerText = '';
         a = '';

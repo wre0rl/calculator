@@ -30,3 +30,14 @@ function operate(a, op, b) {
 }
 
 console.log(operate(a, operator, b));
+
+
+// Event Listener
+const buttons = document.querySelectorAll('.button');
+const display = document.querySelector('.display');
+
+buttons.forEach((button) => {
+  button.addEventListener('click', (e) => {
+    display.textContent += e.target.textContent;
+  });
+});

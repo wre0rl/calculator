@@ -42,9 +42,9 @@ buttons.forEach((button) => {
     // Store the variable if operator button is clicked
     if (a) {
       if (operatorList.includes(e.target.innerText)) {
-        display.innerText += e.target.innerText;
         operator = e.target.innerText;
         console.log(operator);
+        display.innerText += operator;
       }
     }
 
@@ -82,9 +82,8 @@ buttons.forEach((button) => {
     }
     
     // TODO
-    // Disable = input?
     // Do this 12 + 7 - 5 * 3 = 42
-    // fix display
+    // fix display (change into array for better styling support?)
     // REfactor?
   });
 });

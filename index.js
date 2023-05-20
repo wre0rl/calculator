@@ -39,17 +39,18 @@ const utilityList = ['=', 'AC'];
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    // Show the clicked button
-    display.innerText += e.target.innerText;
-
     // Store the variable if operator button is clicked
-    if (operatorList.includes(e.target.innerText)) {
-      operator = e.target.innerText;
-      console.log(operator);
+    if (a) {
+      if (operatorList.includes(e.target.innerText)) {
+        display.innerText += e.target.innerText;
+        operator = e.target.innerText;
+        console.log(operator);
+      }
     }
 
     // Store the variable if num button is clicked
     if (operatorList.includes(e.target.innerText) === false && utilityList.includes(e.target.innerText) === false) {
+      display.innerText += e.target.innerText;
       if (!operator) {
         a += e.target.innerText;
         console.log(a)
@@ -60,23 +61,25 @@ buttons.forEach((button) => {
     }
 
     
-      if (utilityList.includes(e.target.innerText)) {
-        if (e.target.innerText === '=') {
-          if (a && b && operator) {
-            const calc = operate(parseFloat(a), operator, parseFloat(b));
-            display.innerText = calc;
-            a = calc; // Store the operate result for next calculation
-            // Reset the variable
-            b = '';
-            operator = '';
-          }
-        } else {
-          display.innerText = '';
-          a = '';
+    if (utilityList.includes(e.target.innerText)) {
+      if (e.target.innerText === '=') {
+        if (a && b && operator) {
+          display.innerText += e.target.innerText;
+          const calc = operate(parseFloat(a), operator, parseFloat(b));
+          display.innerText = calc;
+          a = calc; // Store the operate result for next calculation
+          // Reset the variable
           b = '';
           operator = '';
         }
+      } else {
+        display.innerText = '';
+        a = '';
+        b = '';
+        operator = '';
       }
+      
+    }
     
     // TODO
     // Disable = input?

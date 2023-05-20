@@ -14,30 +14,61 @@ function divide(a, b) {
   return a / b;
 }
 
-const a = 3, 
-      b = 3,
-      operator = 'multiply';
+let a = '', 
+    b = '',
+    operator = '';
 
 function operate(a, op, b) {
   calculate = {
-    'add': add(a, b),
-    'subtract': subtract(a, b),
-    'multiply': multiply(a, b),
-    'divide': divide(a, b)
+    '+': add(a, b),
+    '-': subtract(a, b),
+    '*': multiply(a, b),
+    '/': divide(a, b)
   };
 
   return calculate[op];
 }
-
-console.log(operate(a, operator, b));
+//console.log(operate(a, operator, b));
 
 
 // Event Listener
 const buttons = document.querySelectorAll('.button');
 const display = document.querySelector('.display');
+const operatorList = ['+', '-', '*', '/'];
+const utilityList = ['=', 'AC'];
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    display.textContent += e.target.textContent;
+    // Show the clicked button
+    display.innerText += e.target.innerText;
+
+    // Store the variable if operator button is clicked
+    if (operatorList.includes(e.target.innerText)) {
+      operator = e.target.innerText;
+      console.log(operator);
+    }
+
+    // Store the variable if num button is clicked
+    if (operatorList.includes(e.target.innerText) === false && utilityList.includes(e.target.innerText) === false) {
+      if (!operator) {
+        a += e.target.innerText;
+        console.log(a)
+      } else {
+        b += e.target.innerText;
+        console.log(b)
+      }
+    }
+
+    
+    if (utilityList.includes(e.target.innerText)) {
+      if (e.target.innerText === '=') {
+        console.log(a + operator + b);
+      } else {
+        console.log('clear var and text');
+      }
+    }
+
+    // TODO
+    // Disable = input?
   });
 });

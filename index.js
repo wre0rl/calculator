@@ -64,7 +64,10 @@ buttons.forEach((button) => {
       if (e.target.innerText === '=') {
         console.log(a + operator + b);
       } else {
-        console.log('clear var and text');
+        display.innerText = '';
+        a = '';
+        b = '';
+        operator = '';
       }
     }
 

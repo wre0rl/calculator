@@ -64,6 +64,10 @@ buttons.forEach((button) => {
       if (e.target.innerText === '=') {
         const calc = operate(parseFloat(a), operator, parseFloat(b));
         display.innerText = calc;
+        a = calc; // Store the operate result for next calculation
+        // Reset the variable
+        b = '';
+        operator = '';
       } else {
         display.innerText = '';
         a = '';
@@ -74,5 +78,8 @@ buttons.forEach((button) => {
 
     // TODO
     // Disable = input?
+    // Do this 12 + 7 - 5 * 3 = 42
+    // ???
+    // REfactor?
   });
 });

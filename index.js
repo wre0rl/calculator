@@ -5,8 +5,7 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 const operate = (a, operator, b) => {
-  a = parseFloat(a);
-  b = parseFloat(b);
+  [a, b] = [parseFloat(a), parseFloat(b)];
 
   const result = Math.round(operators[operator](a, b) * 1000000) / 1000000;
   clearVariables();
@@ -14,14 +13,16 @@ const operate = (a, operator, b) => {
 }
 
 const showDisplay = (result) => {
+  let text = '';
+
   if (result) {
-    result = result.toString();
-    display.innerText = result;
-    a = result;
-    result = '';
+    text = result.toString();
+    [a, result] = [result, ''];
   } else {
-    display.innerText = `${a} ${operator} ${b}`;
+    text = `${a} ${operator} ${b}`;
   }
+
+  display.innerText = text;
 };
 
 const clearDisplay = () => {

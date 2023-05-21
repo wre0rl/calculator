@@ -9,37 +9,37 @@ function operate(a, op, b) {
   b = parseFloat(b);
 
   const operators = {
-    '+': add(a, b),
-    '-': subtract(a, b),
-    '*': multiply(a, b),
-    '/': divide(a, b)
+    '+': add,
+    '-': subtract,
+    '*': multiply,
+    '/': divide
   };
 
-  const result = Math.round(operators[op] * 1000000) / 1000000;
-  temp = result.toString();
+  const result = Math.round(operators[op](a, b) * 1000000) / 1000000;
   clearVariables();
-  showDisplay();
+  showDisplay(result);
 }
 
-function showDisplay() {
-  if (temp) {
-    display.innerText = temp;
-    a = temp;
-    temp = '';
+function showDisplay(result) {
+  if (result) {
+    result = result.toString();
+    display.innerText = result;
+    a = result;
+    result = '';
   } else {
     display.innerText = `${a} ${operator} ${b}`;
   }
 }
 
 function clearDisplay() {
-  display.innerText = '0';
+  display.innerText = '';
 }
 
 function clearVariables() {
-  [a, b, operator] = ['0', '', ''];
+  [a, b, operator] = ['', '', ''];
 }
 
-let [a, b, operator, temp] = ['0', '', '', ''];
+let [a, b, operator] = ['', '', ''];
 
 // Event Listener
 const buttons = document.querySelectorAll('.button');
@@ -48,45 +48,53 @@ const operatorList = ['+', '-', '*', '/'];
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    const innerText = e.target.innerText;
+    let innerText = e.target.innerText;
     const isOperator = operatorList.includes(innerText);
-    const isDisplayDecimal = display.innerText.includes('.');
+    const isDecimal = (innerText === '.');
+    const isAC = (innerText === 'AC');
+    const isEqual = (innerText === '=');
 
     // Store operator
     if (isOperator) {
-      if (a && b && operator) { // When there's a, operator, b and user clicked next operator it'll calculate
+      if (a && b && operator) {
         operate(a, operator, b);
       }
       operator = innerText;
     }
 
     // Store a & b
-    // TODO 0.5.5.5 (Disable/remove the decimal input after the first one)
     if (!isOperator) {
-      if (!operator) {
-        if (a.charAt(0) === '0' && innerText !== '.' && !isDisplayDecimal) {
-          a = '';
+      let currentOperand = (operator) ? b : a;
+
+      if (isDecimal && currentOperand.charAt(0) === '') {
+        currentOperand += '0';
+      }
+
+      if (isDecimal) {
+        if (currentOperand.includes('.')) {
+          innerText = '';
         }
-        a += innerText;
+      }
+
+      currentOperand += innerText;
+      if (operator) {
+        b = currentOperand;
       } else {
-        if (innerText === '.' && b.charAt(0) === '') {
-          b += '0';
-        }
-        b += innerText;
+        a = currentOperand;
+      }
+    }
+
+    // Calculate
+    if (isEqual) {
+      if (a && b && operator) {
+        operate(a, operator, b);
       }
     }
 
     // Clear display & variables
-    if (innerText === 'AC') {
+    if (isAC) {
       clearDisplay();
       clearVariables();
-    }
-    
-    // Calculate
-    if (innerText === '=') {
-      if (a && b && operator) {
-        operate(a, operator, b);
-      }
     }
     
     showDisplay();

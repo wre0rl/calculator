@@ -69,7 +69,6 @@ buttons.forEach((button) => {
         operator = previousOperator;
       } else {
         operator = innerText;
-        
       }
     }
 

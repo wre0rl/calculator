@@ -18,8 +18,6 @@ function operate(a, op, b) {
   showOperate(operators[op]);
 }
 
-//console.log(multiply(0.2, 3));
-
 function showOperate(result) {
   clearVariables();
   display.innerText = result;
@@ -62,6 +60,7 @@ buttons.forEach((button) => {
     }
 
     // Store a & b
+    // TODO 0.5.5.5 (Disable/remove the decimal input after the first one)
     if (!isOperator) {
       if (!operator) {
         if (a.charAt(0) === '0') {
@@ -71,8 +70,10 @@ buttons.forEach((button) => {
         }
         a += innerText;
       } else {
+        if (isDecimal) {
+          b += '0';
+        }
         b += innerText;
-        // TODO: Add 0 if user input . after operator e.g 0.2 + .2 ???
       }
     }
 

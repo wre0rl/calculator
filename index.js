@@ -19,6 +19,7 @@ function operate(a, op, b) {
 }
 
 function showOperate(result) {
+  result = Math.round(result * 1000000) / 1000000;
   clearVariables();
   display.innerText = result;
   a = result.toString();
@@ -47,7 +48,7 @@ buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
     const innerText = e.target.innerText;
     const isOperator = operatorList.includes(innerText);
-    const isDecimal = display.innerText.includes('.');
+    const isDisplayDecimal = display.innerText.includes('.');
 
     // Store operator
     if (isOperator) {
@@ -64,13 +65,13 @@ buttons.forEach((button) => {
     if (!isOperator) {
       if (!operator) {
         if (a.charAt(0) === '0') {
-          if (innerText !== '.' && !isDecimal) {
+          if (innerText !== '.' && !isDisplayDecimal) {
             a = '';
           }
         }
         a += innerText;
       } else {
-        if (isDecimal) {
+        if (innerText === '.') {
           b += '0';
         }
         b += innerText;
@@ -93,3 +94,6 @@ buttons.forEach((button) => {
     showDisplay();
   });
 });
+
+// TODO 
+// Return to 0 if users calculate the a + b e.g 2 + 3 = 6 then user input 0 then a became 60

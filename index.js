@@ -8,13 +8,6 @@ const operate = (a, operator, b) => {
   a = parseFloat(a);
   b = parseFloat(b);
 
-  const operators = {
-    '+': add,
-    '-': subtract,
-    '*': multiply,
-    '/': divide
-  };
-
   const result = Math.round(operators[operator](a, b) * 1000000) / 1000000;
   clearVariables();
   showDisplay(result);
@@ -39,17 +32,23 @@ const clearVariables = () => {
   [a, b, operator] = ['', '', ''];
 };
 
+const operators = {
+  '+': add,
+  '-': subtract,
+  '*': multiply,
+  '/': divide
+};
+
 let [a, b, operator] = ['', '', ''];
 
 // Event Listener
 const buttons = document.querySelectorAll('.button');
 const display = document.querySelector('.display');
-const operatorList = ['+', '-', '*', '/'];
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
     let currentText = e.target.innerText;
-    const isOperator = operatorList.includes(currentText);
+    const isOperator = [...Object.keys(operators)].includes(currentText);
     const isDecimal = (currentText === '.');
     const isAC = (currentText === 'AC');
     const isEqual = (currentText === '=');

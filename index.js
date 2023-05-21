@@ -21,12 +21,18 @@ function operate(a, op, b) {
 function showOperate(result) {
   result = Math.round(result * 1000000) / 1000000;
   clearVariables();
-  display.innerText = result;
-  a = result.toString();
+  temp = result.toString();
+  showDisplay();
 }
 
-function showDisplay(innerText) {
-  display.innerText = `${a} ${operator} ${b}`;
+function showDisplay() {
+  if (temp) {
+    display.innerText = temp;
+    a = temp;
+    temp = '';
+  } else {
+    display.innerText = `${a} ${operator} ${b}`;
+  }
 }
 
 function clearVariables() {
@@ -37,7 +43,7 @@ function clearDisplay() {
   display.innerText = '0';
 }
 
-let [a, b, operator] = ['0', '', ''];
+let [a, b, operator, temp] = ['0', '', '', ''];
 
 // Event Listener
 const buttons = document.querySelectorAll('.button');
@@ -94,6 +100,3 @@ buttons.forEach((button) => {
     showDisplay();
   });
 });
-
-// TODO 
-// Return to 0 if users calculate the a + b e.g 2 + 3 = 6 then user input 0 then a became 60

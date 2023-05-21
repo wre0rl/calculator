@@ -35,7 +35,7 @@ function showOperate(res) {
 }
 
 function showDisplay(innerText) {
-  display.innerText = a + operator + b;
+  display.innerText = `${a} ${operator} ${b}`;
 }
 
 function clearVariable() {
@@ -63,14 +63,13 @@ buttons.forEach((button) => {
 
     // Store operator
     if (operatorList.includes(innerText)) {
-      let previousOperator = operator;
-      console.log(operator);
       if (a && b && operator) { // When there's a, operator, b and user clicked next operator it'll calculate
         operate(a, operator, b);
-        display.innerText += previousOperator;
+        let previousOperator = innerText;
         operator = previousOperator;
       } else {
         operator = innerText;
+        
       }
     }
 

@@ -15,13 +15,9 @@ function operate(a, op, b) {
     '/': divide(a, b)
   };
 
-  showOperate(operators[op]);
-}
-
-function showOperate(result) {
-  result = Math.round(result * 1000000) / 1000000;
-  clearVariables();
+  const result = Math.round(operators[op] * 1000000) / 1000000;
   temp = result.toString();
+  clearVariables();
   showDisplay();
 }
 
@@ -35,12 +31,12 @@ function showDisplay() {
   }
 }
 
-function clearVariables() {
-  [a, b, operator] = ['0', '', ''];
-}
-
 function clearDisplay() {
   display.innerText = '0';
+}
+
+function clearVariables() {
+  [a, b, operator] = ['0', '', ''];
 }
 
 let [a, b, operator, temp] = ['0', '', '', ''];
@@ -68,14 +64,12 @@ buttons.forEach((button) => {
     // TODO 0.5.5.5 (Disable/remove the decimal input after the first one)
     if (!isOperator) {
       if (!operator) {
-        if (a.charAt(0) === '0') {
-          if (innerText !== '.' && !isDisplayDecimal) {
-            a = '';
-          }
+        if (a.charAt(0) === '0' && innerText !== '.' && !isDisplayDecimal) {
+          a = '';
         }
         a += innerText;
       } else {
-        if (innerText === '.') {
+        if (innerText === '.' && b.charAt(0) === '') {
           b += '0';
         }
         b += innerText;

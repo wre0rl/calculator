@@ -50,6 +50,7 @@ buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
     let currentText = e.target.innerText;
     const isOperator = [...Object.keys(operators)].includes(currentText);
+    const isNegative = (currentText === '-');
     const isDecimal = (currentText === '.');
     const isAC = (currentText === 'AC');
     const isEqual = (currentText === '=');
@@ -59,7 +60,14 @@ buttons.forEach((button) => {
       if (a && b && operator) {
         operate(a, operator, b);
       }
-      operator = currentText;
+      
+      if (!a && isNegative) {
+        a += currentText;
+      }
+
+      if (a && a !== '-') {
+        operator = currentText;
+      }
     }
 
     // Store a & b

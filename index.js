@@ -48,18 +48,18 @@ const operatorList = ['+', '-', '*', '/'];
 
 buttons.forEach((button) => {
   button.addEventListener('click', (e) => {
-    let innerText = e.target.innerText;
-    const isOperator = operatorList.includes(innerText);
-    const isDecimal = (innerText === '.');
-    const isAC = (innerText === 'AC');
-    const isEqual = (innerText === '=');
+    let currentText = e.target.innerText;
+    const isOperator = operatorList.includes(currentText);
+    const isDecimal = (currentText === '.');
+    const isAC = (currentText === 'AC');
+    const isEqual = (currentText === '=');
 
     // Store operator
     if (isOperator) {
       if (a && b && operator) {
         operate(a, operator, b);
       }
-      operator = innerText;
+      operator = currentText;
     }
 
     // Store a & b
@@ -72,11 +72,11 @@ buttons.forEach((button) => {
 
       if (isDecimal) {
         if (currentOperand.includes('.')) {
-          innerText = '';
+          currentText = '';
         }
       }
 
-      currentOperand += innerText;
+      currentOperand += currentText;
       if (operator) {
         b = currentOperand;
       } else {

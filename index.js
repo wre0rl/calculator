@@ -71,7 +71,7 @@ buttons.forEach((button) => {
     }
 
     // Store a & b
-    if (!isOperator) {
+    if (!isOperator && !isEqual) {
       let currentOperand = (operator) ? b : a;
 
       if (isDecimal && currentOperand.charAt(0) === '') {

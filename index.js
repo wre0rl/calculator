@@ -60,10 +60,8 @@ buttons.forEach((button) => {
     if (isOperator) {
       if (a && b && operator) { // When there's a, operator, b and user clicked next operator it'll calculate
         operate(a, operator, b);
-        operator = innerText;
-      } else {
-        operator = innerText;
       }
+      operator = innerText;
     }
 
     // Store a & b

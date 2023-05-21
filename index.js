@@ -4,7 +4,7 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-function operate(a, op, b) {
+const operate = (a, operator, b) => {
   a = parseFloat(a);
   b = parseFloat(b);
 
@@ -15,12 +15,12 @@ function operate(a, op, b) {
     '/': divide
   };
 
-  const result = Math.round(operators[op](a, b) * 1000000) / 1000000;
+  const result = Math.round(operators[operator](a, b) * 1000000) / 1000000;
   clearVariables();
   showDisplay(result);
 }
 
-function showDisplay(result) {
+const showDisplay = (result) => {
   if (result) {
     result = result.toString();
     display.innerText = result;
@@ -29,15 +29,15 @@ function showDisplay(result) {
   } else {
     display.innerText = `${a} ${operator} ${b}`;
   }
-}
+};
 
-function clearDisplay() {
+const clearDisplay = () => {
   display.innerText = '';
-}
+};
 
-function clearVariables() {
+const clearVariables = () => {
   [a, b, operator] = ['', '', ''];
-}
+};
 
 let [a, b, operator] = ['', '', ''];
 

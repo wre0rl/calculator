@@ -9,14 +9,14 @@ const operate = (a, operator, b) => {
 
   const result = Math.round(operators[operator](a, b) * 1000000) / 1000000;
   clearVariables();
-  showDisplay(result);
+  showDisplay(result.toString());
 }
 
 const showDisplay = (result) => {
   let text = '';
 
   if (result) {
-    text = result.toString();
+    text = result;
     [a, result] = [result, ''];
   } else {
     text = `${a} ${operator} ${b}`;
@@ -53,6 +53,7 @@ buttons.forEach((button) => {
     const isNegative = (currentText === '-');
     const isDecimal = (currentText === '.');
     const isPercentage = (currentText === '%');
+    const isDelete = (currentText === 'DEL');
     const isAC = (currentText === 'AC');
     const isEqual = (currentText === '=');
 
@@ -85,7 +86,9 @@ buttons.forEach((button) => {
         }
       }
       
-      currentOperand += currentText;
+      if (!isDelete)  {// Don't store DEL in string
+        currentOperand += currentText;
+      }
 
       // Convert to percentage
       if (isPercentage) {
@@ -111,6 +114,21 @@ buttons.forEach((button) => {
     if (isAC) {
       clearDisplay();
       clearVariables();
+    }
+
+    // Delete a char at display & variables
+    if (isDelete) {
+      if (a && !operator) {
+        a = a.slice(0, -1);
+      }
+
+      if (operator && !b) {
+        operator = operator.slice(0, -1);
+      }
+
+      if (b) {
+        b = b.slice(0, -1);
+      }
     }
     
     showDisplay();

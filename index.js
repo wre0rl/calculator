@@ -94,12 +94,17 @@ buttons.forEach((button) => {
         }
       }
 
+      // Prevent -000
+      if (a.charAt(0) === '-' && !operator && !b && currentOperand.charAt(1) === '0') {
+        currentOperand = '0';
+      }
+
       // Convert to percentage
       if (isPercentage) {
         currentOperand = currentOperand.slice(0, -1);
         currentOperand = divide(parseFloat(currentOperand), 100).toString();
         if (isNaN(currentOperand)) { // Fix 2 + % = NaN
-          currentOperand = 0;
+          currentOperand = '0';
         }
       }
 

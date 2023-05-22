@@ -95,10 +95,12 @@ buttons.forEach((button) => {
       }
 
       // Convert to percentage
-      // TODO: ERROR, 2 + % = NaN
       if (isPercentage) {
         currentOperand = currentOperand.slice(0, -1);
         currentOperand = divide(parseFloat(currentOperand), 100).toString();
+        if (isNaN(currentOperand)) { // Fix 2 + % = NaN
+          currentOperand = 0;
+        }
       }
 
       if (operator) {

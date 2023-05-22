@@ -86,14 +86,19 @@ buttons.forEach((button) => {
         }
       }
       
-      if (!isDelete)  {// Don't store DEL in string
+      if (!isDelete)  { // Don't store DEL in string
         currentOperand += currentText;
+        // If user delete a decimal e.g 0.5 to 0 then input 1 or another number it'll reset the 0 so it doesn't become 01
+        if (currentOperand.charAt(0) === '0' && currentOperand.charAt(1) !== '.') {
+          currentOperand = currentText;
+        }
       }
 
       // Convert to percentage
+      // TODO: ERROR, 2 + % = NaN
       if (isPercentage) {
         currentOperand = currentOperand.slice(0, -1);
-        currentOperand = divide(parseFloat(currentOperand), 100);
+        currentOperand = divide(parseFloat(currentOperand), 100).toString();
       }
 
       if (operator) {

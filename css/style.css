@@ -6,20 +6,23 @@ body {
 }
 
 .container {
-  width: 180px;
+  border: 1px solid black;
+  padding: 17px;
+  width: 220px;
 }
 
 .display {
-  height: 20px;
-  border: 1px black solid;
-  margin-bottom: 3px;
-  display: flex;
-  justify-content: end;
   align-items: end;
-  padding-top: 10px;
-  padding-left: 10px;
-  padding-right: 10px;
-  padding-bottom: 4px;
+  background-color: rgb(201, 215, 205);
+  border: 1px solid black;
+  display: flex;
+  font-size: 18px;
+  height: 20px;
+  justify-content: flex-end;
+  margin-bottom: 3px;
+  padding: 10px;
+  user-select: none;
+  width: 197px;
 }
 
 .buttons {
@@ -30,14 +33,20 @@ body {
 }
 
 .button {
-  display: flex;
   align-items: center;
-  justify-content: center;
   border: 1px solid black;
-  width: 41px;
-  height: 41px;
+  cursor: grab;
+  display: flex;
+  height: 51px;
+  justify-content: center;
+  user-select: none;
+  width: 51px;
+}
+
+.button:hover {
+  background-color: rgb(201, 215, 205);
 }
 
 #zero {
-  width: 86px;
+  width: 106px;
 }

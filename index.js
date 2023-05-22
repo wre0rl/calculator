@@ -52,6 +52,7 @@ buttons.forEach((button) => {
     const isOperator = [...Object.keys(operators)].includes(currentText);
     const isNegative = (currentText === '-');
     const isDecimal = (currentText === '.');
+    const isPercentage = (currentText === '%');
     const isAC = (currentText === 'AC');
     const isEqual = (currentText === '=');
 
@@ -83,8 +84,15 @@ buttons.forEach((button) => {
           currentText = '';
         }
       }
-
+      
       currentOperand += currentText;
+
+      // Convert to percentage
+      if (isPercentage) {
+        currentOperand = currentOperand.slice(0, -1);
+        currentOperand = divide(parseFloat(currentOperand), 100);
+      }
+
       if (operator) {
         b = currentOperand;
       } else {
